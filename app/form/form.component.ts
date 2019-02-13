@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,16 +9,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   
-  constructor() {}
+  constructor(private fb:FormBuilder) {}
 
-  profileForm = new FormGroup({
-    firstName : new FormControl(''), //form control instance
-    lastName : new FormControl(''),
-    address : new FormGroup({   //nested form
-      city: new FormControl(''),
-      street: new FormControl(''),
-      zip: new FormControl(''),
-      state: new FormControl('') 
+  profileForm = this.fb.group({ // form builders
+    firstName : ['',Validators.required], 
+    lastName : ['',Validators.required],
+    address : this.fb.group({   //nested form
+      city: ['',Validators.required],
+      street: ['',Validators.required],
+      zip: ['',Validators.required],
+      state: ['',Validators.required]
       })
   });
 
