@@ -25,7 +25,7 @@ export class GitSearchComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params:ParamMap) => {
-      //paramMap provide us the methods get,has,getAll further info angular.io when a data subscribe it
+      //paramMap provide us the methods get,has,getAll, further info angular.io, when a data subscribe it
         this.searchQuery = params.get('query'); //so we use the get method
         this.displayQuery = params.get('query'); 
         this.gitSearch();
@@ -37,12 +37,9 @@ export class GitSearchComponent implements OnInit {
   }
 
   gitSearch = () => {
-    //the gitSearch() return a promise
-    //if this promise is success then store the response,
-    //else display the error
-    this.GitSearchService.gitSearch(this.searchQuery).then( //we use then on promises like if...else
-                                                            //if it is success then execute the first arrow function
-      response => { this.searchResults = response; },      //else the second arrow function
+    
+    this.GitSearchService.gitSearch(this.searchQuery).subscribe( 
+      response => { this.searchResults = response; },     
       error => { alert("Error: "+ error.statusText) }
     )
   }
